@@ -101,20 +101,27 @@ $("#inviters").innerHTML=CONFIG.inviters.map(g=>`<small>${g.label}</small>`+g.na
 // nav
 const secs=$$("main section");
 $("#nav").innerHTML=secs.map(s=>`<a href="#${s.id}" aria-label="${s.dataset.label}" title="${s.dataset.label}" data-id="${s.id}">${ico(s.id)}<span>${s.dataset.label}</span></a>`).join("");
-$$("#nav a").forEach(a=>a.addEventListener("click",e=>{e.preventDefault();document.getElementById(a.dataset.id).scrollIntoView({behavior:"smooth"});}));
-const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)$$("#nav a").forEach(a=>a.classList.toggle("on",a.dataset.id===e.target.id));}),{threshold:.5});
-secs.forEach(s=>io.observe(s));
+$$("#nav a").forEach(a=>a.addEventListener("click",e=>{e.preventDefault();showPage(a.dataset.id);}));
+function showPage(id){
+  const active=secs.find(s=>s.id===id);
+  if(!active)return;
+  secs.forEach(s=>{
+    const selected=s===active;
+    s.classList.toggle("active",selected);
+    s.setAttribute("aria-hidden",String(!selected));
+    if(selected)$$(".rv",s).forEach(el=>el.classList.add("in"));
+  });
+  $$("#nav a").forEach(a=>{
+    const selected=a.dataset.id===id;
+    a.classList.toggle("on",selected);
+    a.setAttribute("aria-current",selected?"page":"false");
+  });
+  active.scrollTop=0;
+}
 // reveal
 $$(".wrap > *").forEach(el=>el.classList.add("rv"));
-const rvo=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");rvo.unobserve(e.target);}}),{threshold:.15});
-$$(".rv").forEach((el,i)=>{el.style.transitionDelay=(i%4)*.12+"s";rvo.observe(el);});
-// parallax + progress
-const fls=$$("main .fl svg");
-function onScroll(){
-  const h=document.documentElement,p=h.scrollTop/(h.scrollHeight-innerHeight)*100;$("#progress").style.width=p+"%";
-  fls.forEach(sv=>{const r=sv.parentElement.parentElement.getBoundingClientRect();const d=(r.top+r.height/2-innerHeight/2)*.06;sv.style.translate=`0 ${d.toFixed(1)}px`;});
-}
-addEventListener("scroll",onScroll,{passive:true});onScroll();
+$$(".rv").forEach((el,i)=>{el.style.transitionDelay=(i%4)*.12+"s";});
+showPage("opening");
 // music
 const audio=$("#audio"),mb=$("#music");
 const PLAY='<svg viewBox="0 0 24 24"><circle cx="9" cy="18" r="3"/><path d="M12 18V5l8-2v12"/><circle cx="17" cy="15" r="3"/></svg>';
@@ -126,7 +133,6 @@ $("#open").onclick=()=>{
   $("#cover").classList.add("gone");document.body.classList.remove("locked");
   setTimeout(()=>{$("#cover").style.display="none";},1200);
   if(CONFIG.music){audio.src=CONFIG.music;audio.play().then(()=>setPlay(true)).catch(()=>{});mb.classList.remove("hidden");}
-  scrollTo(0,0);
 };
 // RSVP
 $("#rsvpForm").addEventListener("submit",async e=>{
