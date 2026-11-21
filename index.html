@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Wedding of Aurelia & Reynard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Playfair+Display:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="locked">
+<svg width="0" height="0" style="position:absolute"><defs>
+<filter id="wc" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency=".035" numOctaves="2" seed="4"/><feDisplacementMap in="SourceGraphic" scale="5"/><feGaussianBlur stdDeviation=".35"/></filter>
+</defs></svg>
+<div id="progress"></div>
+
+<!-- COVER -->
+<div id="cover">
+  <div class="fl tl"></div><div class="fl tr"></div><div class="fl bl"></div><div class="fl br"></div>
+  <div class="cover-in">
+    <p class="small">The Wedding of</p>
+    <h1 class="names"><span data-k="bride.short"></span><em>&amp;</em><span data-k="groom.short"></span></h1>
+    <p class="date" data-k="dateShort"></p>
+    <p class="guest">Kepada Yth. <b id="guest">Bapak/Ibu/Saudara/i</b></p>
+    <button id="open" class="btn">Open Invitation</button>
+  </div>
+</div>
+
+<nav id="nav" aria-label="Menu"></nav>
+<button id="music" aria-label="Musik" class="hidden"></button>
+
+<main>
+<!-- A OPENING -->
+<section id="opening" data-label="Opening">
+  <div class="fl tl"></div><div class="fl tr"></div><div class="fl bl"></div><div class="fl br"></div>
+  <div class="wrap center">
+    <p class="small">The Wedding of</p>
+    <div class="photo arch" data-photo="couple" data-init="A&amp;R"></div>
+    <h2 class="names big"><span data-k="bride.short"></span><em>&amp;</em><span data-k="groom.short"></span></h2>
+    <div class="rule"><i></i></div>
+    <p class="date" data-k="dateLabel"></p>
+  </div>
+</section>
+
+<!-- B QUOTES -->
+<section id="quotes" data-label="Quotes" class="alt">
+  <div class="fl tl"></div><div class="fl br"></div>
+  <div class="wrap center narrow">
+    <svg class="qm" viewBox="0 0 40 30"><path d="M2 28V16C2 8 7 3 15 1M22 28V16c0-8 5-13 13-15" fill="none" stroke="currentColor" stroke-width=".8"/></svg>
+    <blockquote data-k="quote.text"></blockquote>
+    <p class="by" data-k="quote.by"></p>
+  </div>
+</section>
+
+<!-- C COUPLE -->
+<section id="couple" data-label="Couple">
+  <div class="fl tr"></div><div class="fl bl"></div>
+  <div class="wrap">
+    <h2 class="title center">Mempelai</h2>
+    <div class="pair">
+      <article class="person">
+        <div class="photo oval" data-photo="bride" data-init="A"><div class="fl-s"></div></div>
+        <div class="txt"><h3 data-k="bride.full"></h3><p class="par" data-k="bride.parents"></p><p data-k="bride.bio"></p></div>
+      </article>
+      <article class="person rev">
+        <div class="photo oval" data-photo="groom" data-init="R"><div class="fl-s"></div></div>
+        <div class="txt"><h3 data-k="groom.full"></h3><p class="par" data-k="groom.parents"></p><p data-k="groom.bio"></p></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- D LIVE -->
+<section id="live" data-label="Live" class="alt">
+  <div class="fl tl"></div><div class="fl br"></div>
+  <div class="wrap split">
+    <div class="photo arch sm" data-photo="live" data-init="Live"></div>
+    <div class="txt">
+      <p class="small">Dari mana pun Anda berada</p>
+      <h2 class="title">Wedding Live Streaming</h2>
+      <p>Saksikan prosesi pernikahan kami secara langsung.</p>
+      <p class="info" data-k="live.when"></p>
+      <a id="watch" class="btn" target="_blank" rel="noopener">Watch Live</a>
+    </div>
+  </div>
+</section>
+
+<!-- E ACARA -->
+<section id="acara" data-label="Acara">
+  <div class="fl tr"></div><div class="fl bl"></div>
+  <div class="wrap">
+    <h2 class="title center">Rangkaian Acara</h2>
+    <div class="events">
+      <div class="ev"><h3>Akad Nikah</h3><p class="d" data-k="akad.day"></p><p class="t" data-k="akad.time"></p><p class="pl" data-k="akad.place"></p><p data-k="akad.addr"></p></div>
+      <div class="vl"></div>
+      <div class="ev"><h3>Resepsi</h3><p class="d" data-k="resepsi.day"></p><p class="t" data-k="resepsi.time"></p><p class="pl" data-k="resepsi.place"></p><p data-k="resepsi.addr"></p></div>
+    </div>
+  </div>
+</section>
+
+<!-- F MAPS -->
+<section id="maps" data-label="Maps" class="alt">
+  <div class="fl tl"></div><div class="fl br"></div>
+  <div class="wrap center">
+    <h2 class="title">Lokasi</h2>
+    <p class="pl" data-k="maps.name"></p><p data-k="maps.addr"></p>
+    <div class="mapframe"><iframe id="mapiframe" loading="lazy" title="Google Maps" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+    <a id="maplink" class="btn" target="_blank" rel="noopener">Open Google Maps</a>
+  </div>
+</section>
+
+<!-- G RSVP -->
+<section id="rsvp" data-label="RSVP">
+  <div class="fl tr"></div><div class="fl bl"></div>
+  <div class="wrap narrow">
+    <h2 class="title center">Konfirmasi Kehadiran</h2>
+    <form id="rsvpForm" autocomplete="off">
+      <label>Nama<input name="nama" required placeholder="Nama lengkap Anda"></label>
+      <label>Jumlah tamu<input name="jumlah" type="number" min="1" max="10" value="1" required></label>
+      <div class="choice"><input type="radio" name="hadir" id="h1" value="Hadir" checked><label for="h1">Hadir</label><input type="radio" name="hadir" id="h2" value="Tidak Hadir"><label for="h2">Tidak Hadir</label></div>
+      <label>Ucapan &amp; doa<textarea name="ucapan" rows="3" placeholder="Tuliskan ucapan dan doa untuk kami"></textarea></label>
+      <button class="btn" type="submit">Kirim RSVP</button>
+      <p id="status" class="status" role="status"></p>
+    </form>
+  </div>
+</section>
+
+<!-- H MENGUNDANG -->
+<section id="mengundang" data-label="Mengundang" class="alt">
+  <div class="fl tl"></div><div class="fl tr"></div><div class="fl bl"></div><div class="fl br"></div>
+  <div class="wrap center narrow">
+    <h2 class="title">Turut Mengundang</h2>
+    <div id="inviters"></div>
+  </div>
+</section>
+
+<!-- I THANKS -->
+<section id="thanks" data-label="Thanks">
+  <div class="fl tl"></div><div class="fl tr"></div><div class="fl bl"></div><div class="fl br"></div>
+  <div class="wrap center narrow">
+    <div class="photo arch" data-photo="thanks" data-init="A&amp;R"><div class="fl-s"></div></div>
+    <h2 class="title">Terima Kasih</h2>
+    <p data-k="thanks.text"></p>
+    <h2 class="names big"><span data-k="bride.short"></span><em>&amp;</em><span data-k="groom.short"></span></h2>
+    <p class="date" data-k="dateShort"></p>
+    <p class="closing" data-k="thanks.closing"></p>
+  </div>
+</section>
+</main>
+<audio id="audio" loop preload="none"></audio>
+<script src="script.js"></script>
+</body>
+</html>
