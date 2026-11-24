@@ -21,7 +21,7 @@ const CONFIG = {
   },
   akad: {
     day: "Senin, 28 Desember 2026",
-    time: "11.00 WIB – sampai dengan selesai",
+    time: "10.00–11.00 WIB",
     place: "Sampuara kabupaten Toba",
   },
   resepsi: {
