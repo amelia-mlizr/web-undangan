@@ -36,7 +36,7 @@ const CONFIG = {
     link: "https://maps.app.goo.gl/q4fBrDwtKgUXgrCz6"
   },
   rsvp: {
-    whatsapp: "6281370914247",
+    whatsapp: "6282272748502",
     sheetsUrl: ""
   },
   gifts: {
@@ -169,7 +169,7 @@ function cluster(v) {
   s += `<path d="M32 380C92 356 132 378 172 348C218 314 258 342 310 302" fill="none" stroke="#b8975a" stroke-width=".7" stroke-opacity=".65"/>`;
   return s + `</g></svg>`;
 }
-const CL = [cluster(0), cluster(1), cluster(2)];
+let CL;
 function smallCluster() {
   seed = 303;
   let s = `<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><defs><filter id="petalShadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="1" dy="1.5" stdDeviation="1.4" flood-color="#5d5144" flood-opacity=".14"/></filter></defs><g filter="url(#wc)">`;
@@ -199,36 +199,68 @@ const ICONS={
 const ico=k=>`<svg viewBox="0 0 24 24" aria-hidden="true">${ICONS[k]}</svg>`;
 
 /* ============ INIT ============ */
-// bunga
-$$(".fl").forEach((el,i)=>el.innerHTML=CL[i%3]);
-const smallClusterMarkup=smallCluster();
-$$(".fl-s").forEach(el=>el.innerHTML=smallClusterMarkup);
+let botanicalImageUrls;
+let smallBotanicalImageUrl;
+const turbulenceFilter='<filter id="wc" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency=".035" numOctaves="2" seed="4"/><feDisplacementMap in="SourceGraphic" scale="5"/><feGaussianBlur stdDeviation=".35"/></filter>';
+function botanicalImageUrl(markup,size){
+  const svg=markup
+    .replace("<svg viewBox=",`<svg width="${size}" height="${size}" viewBox=`)
+    .replace("<defs>",`<defs>${turbulenceFilter}`);
+  return URL.createObjectURL(new Blob([svg],{type:"image/svg+xml"}));
+}
+function makeBotanicalImage(src){
+  const image=document.createElement("img");
+  image.src=src;
+  image.alt="";
+  image.setAttribute("aria-hidden","true");
+  image.decoding="async";
+  return image;
+}
+function initializeBotanicals(root){
+  if(!CL)CL=[cluster(0),cluster(1),cluster(2)];
+  if(!botanicalImageUrls)botanicalImageUrls=CL.map(markup=>botanicalImageUrl(markup,420));
+  $$(".fl",root).forEach((el,i)=>{
+    if(!el.firstElementChild)el.appendChild(makeBotanicalImage(botanicalImageUrls[i%3]));
+  });
+  const smallFlowers=$$(".fl-s",root);
+  if(smallFlowers.length){
+    if(!smallBotanicalImageUrl)smallBotanicalImageUrl=botanicalImageUrl(smallCluster(),200);
+    smallFlowers.forEach(el=>{
+      if(!el.firstElementChild)el.appendChild(makeBotanicalImage(smallBotanicalImageUrl));
+    });
+  }
+}
+const initializedPhotos=new WeakSet();
+function initializePhotos(root){
+  $$("[data-photo]",root).forEach(el=>{
+    if(initializedPhotos.has(el))return;
+    const u=CONFIG.photos[el.dataset.photo];
+    if(u){
+      if(el.classList.contains("oval")){
+        const img=document.createElement("img");
+        img.className="oval-photo";
+        img.src=u;
+        img.alt=el.dataset.photo==="bride"?CONFIG.bride.full:CONFIG.groom.full;
+        img.decoding="async";
+        img.loading="lazy";
+        el.appendChild(img);
+      }else{
+        el.style.backgroundImage=`url(${u})`;el.classList.add("has");
+      }
+    }
+    if(!el.classList.contains("oval")){
+      const t=document.createElement("span");t.textContent=el.dataset.init;t.style.position="relative";t.style.zIndex="1";
+      el.prepend(t);
+    }
+    initializedPhotos.add(el);
+  });
+}
 // data
 $$("[data-k]").forEach(el=>{const v=el.dataset.k.split(".").reduce((o,k)=>o&&o[k],CONFIG);if(v!=null)el.textContent=v;});
-$$("[data-photo]").forEach(el=>{
-  const u=CONFIG.photos[el.dataset.photo];
-  if(u){
-    if(el.classList.contains("oval")){
-      const img=document.createElement("img");
-      img.className="oval-photo";
-      img.src=u;
-      img.alt=el.dataset.photo==="bride"?CONFIG.bride.full:CONFIG.groom.full;
-      img.decoding="async";
-      img.loading="lazy";
-      el.appendChild(img);
-    }else{
-      el.style.backgroundImage=`url(${u})`;el.classList.add("has");
-    }
-  }
-  if(!el.classList.contains("oval")){
-    const t=document.createElement("span");t.textContent=el.dataset.init;t.style.position="relative";t.style.zIndex="1";
-    el.prepend(t);
-  }
-});
 // guest dari ?to=Nama
 const to=new URLSearchParams(location.search).get("to");if(to)$("#guest").textContent=to;
 // links
-$("#maplink").href=CONFIG.maps.link;$("#mapiframe").src=CONFIG.maps.embed;
+$("#maplink").href=CONFIG.maps.link;
 $("#inviters").innerHTML=CONFIG.inviters.map(g=>`<small>${g.label}</small>`+g.names.map(n=>`<p>${n}</p>`).join("")).join("");
 
 const giftAccounts=$("#giftAccounts");
@@ -260,7 +292,7 @@ function makeGiftAccount(account){
   logo.appendChild(fallback);
   if(account.logo){
     const image=document.createElement("img");
-    image.src=account.logo;
+    image.dataset.src=account.logo;
     image.alt=`Logo ${bankNameValue}`;
     image.loading="lazy";
     image.decoding="async";
@@ -469,9 +501,21 @@ if(calendarMenu){
   }));
 }
 
-function showPage(id){
+function showPage(id,deferBotanicals=false){
   const active=secs.find(s=>s.id===id);
   if(!active)return;
+  initializePhotos(active);
+  if(!deferBotanicals)initializeBotanicals(active);
+  if(id==="maps"){
+    const map=$("#mapiframe");
+    if(!map.hasAttribute("src"))map.src=CONFIG.maps.embed;
+  }
+  if(id==="gift"){
+    $$("#giftAccounts img[data-src]").forEach(image=>{
+      image.src=image.dataset.src;
+      image.removeAttribute("data-src");
+    });
+  }
   const previous=$("main section.active");
   if(previous&&previous!==active&&window.gsap&&!reducedMotion){
     gsap.to(previous,{opacity:0,y:-8,duration:.38,ease:"power3.out",onComplete:()=>{previous.style.transform="";}});
@@ -527,7 +571,8 @@ function showPage(id){
 // reveal
 $$(".wrap > *").forEach(el=>el.classList.add("rv"));
 $$(".rv").forEach((el,i)=>{el.style.transitionDelay=(i%4)*.12+"s";});
-showPage("opening");
+initializeBotanicals($("#cover"));
+showPage("opening",true);
 // music
 const audio=$("#audio"),mb=$("#music");
 const PLAY='<svg viewBox="0 0 24 24"><circle cx="9" cy="18" r="3"/><path d="M12 18V5l8-2v12"/><circle cx="17" cy="15" r="3"/></svg>';
@@ -566,6 +611,8 @@ window.addEventListener("pagehide",pauseMusic);
 window.addEventListener("blur",pauseMusic);
 // open
 $("#open").onclick=()=>{
+  void loadMotionLibraries();
+  requestAnimationFrame(()=>initializeBotanicals($("#opening")));
   const cover=$("#cover");
   if(window.gsap&&!reducedMotion){
     cover.classList.add("curtain-out");
@@ -595,29 +642,47 @@ $("#rsvpForm").addEventListener("submit",async e=>{
   const success=$("#rsvpSuccess");
   if(success&&!reducedMotion){
     success.classList.add("show");
-    gsap.fromTo(success,{y:18,opacity:0},{y:0,opacity:1,duration:.8,ease:"power3.out"});
-    gsap.to("#rsvpSuccess circle,#rsvpSuccess path",{strokeDashoffset:0,duration:.9,stagger:.12,ease:"power3.out"});
+    if(window.gsap){
+      gsap.fromTo(success,{y:18,opacity:0},{y:0,opacity:1,duration:.8,ease:"power3.out"});
+      gsap.to("#rsvpSuccess circle,#rsvpSuccess path",{strokeDashoffset:0,duration:.9,stagger:.12,ease:"power3.out"});
+    }
   }
   e.target.reset();
 });
 
 /* ============ CINEMATIC PREMIUM MOTION ============ */
-const hasGSAP = !reducedMotion && window.gsap && window.ScrollTrigger;
-
-if (hasGSAP) {
-  gsap.registerPlugin(ScrollTrigger);
-
-  if (window.Lenis && !window.matchMedia('(max-width:760px)').matches) {
-    const lenis = new Lenis({lerp:.075, smoothWheel:true, wheelMultiplier:.82, touchMultiplier:.65});
-    requestAnimationFrame(function scroll() {
-      lenis.raf();
-      requestAnimationFrame(scroll);
-    });
-    lenis.on("scroll", ({scroll})=>{
-      const progress = scroll / (document.body.scrollHeight - window.innerHeight);
-      gsap.set("#pageProgress",{scaleX:progress});
-    });
-  }
-
-  // Page-based navigation: setiap section hanya dianimasikan saat aktif.
+function loadMotionScript(src){
+  return new Promise((resolve,reject)=>{
+    const script=document.createElement("script");
+    script.src=src;
+    script.onload=resolve;
+    script.onerror=()=>reject(new Error(`Unable to load motion library: ${src}`));
+    document.head.appendChild(script);
+  });
 }
+let motionLibrariesPromise;
+function loadMotionLibraries(){
+  if(!motionLibrariesPromise){
+    motionLibrariesPromise=loadMotionScript("https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js")
+      .then(()=>loadMotionScript("https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"))
+      .then(()=>loadMotionScript("https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js"))
+      .then(()=>{
+        if(reducedMotion)return;
+        gsap.registerPlugin(ScrollTrigger);
+        if(window.Lenis&&!window.matchMedia("(max-width:760px)").matches){
+          const lenis=new Lenis({lerp:.075,smoothWheel:true,wheelMultiplier:.82,touchMultiplier:.65});
+          requestAnimationFrame(function scroll(){
+            lenis.raf();
+            requestAnimationFrame(scroll);
+          });
+          lenis.on("scroll",({scroll})=>{
+            const progress=scroll/(document.body.scrollHeight-window.innerHeight);
+            gsap.set("#pageProgress",{scaleX:progress});
+          });
+        }
+      })
+      .catch(error=>console.error("Motion libraries failed to load.",error));
+  }
+  return motionLibrariesPromise;
+}
+requestAnimationFrame(()=>requestAnimationFrame(()=>{void loadMotionLibraries();}));

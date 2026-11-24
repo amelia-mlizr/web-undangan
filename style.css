@@ -9,7 +9,9 @@ background:var(--ivory) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
 main section{position:absolute;inset:0;height:100%;min-height:0;overflow-x:hidden;overflow-y:auto;overscroll-behavior-y:contain;touch-action:pan-y;visibility:hidden;opacity:0;pointer-events:none;transition:opacity .55s ease,visibility 0s linear .55s;-webkit-overflow-scrolling:touch}
 main section.active{visibility:visible;opacity:1;pointer-events:auto;transition:opacity .55s ease}
 main section:not(.active) .fl svg,
+main section:not(.active) .fl img,
 main section:not(.active) .fl-s svg,
+main section:not(.active) .fl-s img,
 main section:not(.active) .calendar-day.selected::before{animation-play-state:paused}
 section.alt{background-color:var(--cream)}
 .wrap{position:relative;z-index:2;width:100%;max-width:980px}
@@ -17,12 +19,12 @@ section.alt{background-color:var(--cream)}
 .center>*{margin-left:auto;margin-right:auto}
 /* florals */
 .fl{position:absolute;width:min(48vw,400px);aspect-ratio:1;pointer-events:none;z-index:1;opacity:.95}
-.fl svg{width:100%;height:100%;display:block;animation:sway 9s ease-in-out infinite alternate;transform-origin:0 0}
+.fl svg,.fl img{width:100%;height:100%;display:block;animation:sway 9s ease-in-out infinite alternate;transform-origin:0 0}
 .tl{top:0;left:0}.tr{top:0;right:0;transform:scaleX(-1)}.bl{bottom:0;left:0;transform:scaleY(-1)}.br{bottom:0;right:0;transform:scale(-1)}
 .tr svg{animation-delay:-3s}.bl svg{animation-delay:-5s}.br svg{animation-delay:-7s}
 @keyframes sway{from{rotate:-1.2deg}to{rotate:1.2deg}}
 .fl-s{position:absolute;width:62%;aspect-ratio:1;right:-18%;bottom:-14%;z-index:3;pointer-events:none}
-.fl-s svg{width:100%;height:100%;animation:sway 8s ease-in-out infinite alternate}
+.fl-s svg,.fl-s img{width:100%;height:100%;animation:sway 8s ease-in-out infinite alternate}
 /* type */
 .small{font-family:var(--sans);font-size:11px;letter-spacing:.38em;text-transform:uppercase;color:var(--olive);margin-bottom:18px}
 .names{font-family:var(--serif);font-weight:300;font-size:clamp(46px,11vw,88px);line-height:1;color:var(--olive);display:flex;flex-direction:column;align-items:center}
@@ -164,7 +166,7 @@ body:not(.locked) #nav{transform:translateY(-50%)}
 /* === Premium cinematic page transitions === */
 main section::before{content:"";position:absolute;inset:-20%;z-index:8;pointer-events:none;opacity:0;background:radial-gradient(circle at 50% 50%,rgba(184,151,90,.22),transparent 13%,rgba(251,247,239,.72) 36%,transparent 62%);mix-blend-mode:soft-light}
 main section.active::before{animation:cinematicAura 1.8s cubic-bezier(.16,1,.3,1) both}
-main section.active .fl svg{animation:sway 9s ease-in-out infinite alternate,floralEntrance 1.7s cubic-bezier(.16,1,.3,1) both}
+main section.active .fl svg,main section.active .fl img{animation:sway 9s ease-in-out infinite alternate,floralEntrance 1.7s cubic-bezier(.16,1,.3,1) both}
 main section.active .wrap{backface-visibility:hidden}
 main section.active .title,main section.active .names,main section.active blockquote,
 main section.active .small,main section.active .by,main section.active .date,
@@ -176,6 +178,12 @@ main section.active .small,main section.active .by{animation-delay:.08s}
 main section.active .photo{animation:portraitReveal 1.45s cubic-bezier(.16,1,.3,1) both}
 main section.active#opening .wrap{animation:openingLens 1.65s cubic-bezier(.16,1,.3,1) both}
 main section.active#opening .rule{animation:ruleReveal 1.2s .48s cubic-bezier(.16,1,.3,1) both}
+body.locked main section.active#opening::before,
+body.locked main section.active#opening .wrap,
+body.locked main section.active#opening .wrap *,
+body.locked main section.active#opening .fl svg,
+body.locked main section.active#opening .fl img{animation-play-state:paused}
+body.locked main section.active#opening .rv{transition:none}
 main section.active#quotes .wrap{animation:quoteStage 1.4s cubic-bezier(.16,1,.3,1) both}
 main section.active#quotes blockquote{animation:quoteReveal 1.45s .14s cubic-bezier(.16,1,.3,1) both}
 main section.active#quotes .qm{animation:sealReveal 1.25s cubic-bezier(.16,1,.3,1) both}
