@@ -36,7 +36,7 @@ const CONFIG = {
     link: "https://maps.app.goo.gl/q4fBrDwtKgUXgrCz6"
   },
   rsvp: {
-    whatsapp: "62813902112246",
+    whatsapp: "6281370914247",
     sheetsUrl: ""
   },
   inviters: [
@@ -192,10 +192,26 @@ $$(".fl").forEach((el,i)=>el.innerHTML=CL[i%3]);
 $$(".fl-s").forEach(el=>el.innerHTML=smallCluster());
 // data
 $$("[data-k]").forEach(el=>{const v=el.dataset.k.split(".").reduce((o,k)=>o&&o[k],CONFIG);if(v!=null)el.textContent=v;});
-$$("[data-photo]").forEach(el=>{const u=CONFIG.photos[el.dataset.photo];
-  if(u){el.style.backgroundImage=`url(${u})`;el.classList.add("has");}
-  const t=document.createElement("span");t.textContent=el.dataset.init;t.style.position="relative";t.style.zIndex="1";
-  el.prepend(t);});
+$$("[data-photo]").forEach(el=>{
+  const u=CONFIG.photos[el.dataset.photo];
+  if(u){
+    if(el.classList.contains("oval")){
+      const img=document.createElement("img");
+      img.className="oval-photo";
+      img.src=u;
+      img.alt=el.dataset.photo==="bride"?CONFIG.bride.full:CONFIG.groom.full;
+      img.decoding="async";
+      img.loading="eager";
+      el.appendChild(img);
+    }else{
+      el.style.backgroundImage=`url(${u})`;el.classList.add("has");
+    }
+  }
+  if(!el.classList.contains("oval")){
+    const t=document.createElement("span");t.textContent=el.dataset.init;t.style.position="relative";t.style.zIndex="1";
+    el.prepend(t);
+  }
+});
 // guest dari ?to=Nama
 const to=new URLSearchParams(location.search).get("to");if(to)$("#guest").textContent=to;
 // links
@@ -206,18 +222,22 @@ const secs=$$("main section");
 $("#nav").innerHTML=secs.map(s=>`<a href="#${s.id}" aria-label="${s.dataset.label}" title="${s.dataset.label}" data-id="${s.id}">${ico(s.id)}<span>${s.dataset.label}</span></a>`).join("");
 $$("#nav a").forEach(a=>a.addEventListener("click",e=>{e.preventDefault();showPage(a.dataset.id);}));
 
-secs.forEach((section,index)=>{
+const nextButton=document.createElement("button");
+nextButton.type="button";
+nextButton.id="nextPageButton";
+nextButton.className="next-page-btn";
+document.body.appendChild(nextButton);
+nextButton.addEventListener("click",()=>{
+  if(nextButton.dataset.target)showPage(nextButton.dataset.target);
+});
+function updateNextButton(active){
+  const index=secs.indexOf(active);
   const next=secs[(index+1)%secs.length];
-  const nextIcon=ico(next.id);
-  const nextButton=document.createElement("button");
-  nextButton.type="button";
-  nextButton.className="next-page-btn";
   nextButton.dataset.target=next.id;
   nextButton.setAttribute("aria-label",`Lanjut ke ${next.dataset.label}`);
-  nextButton.innerHTML=`<span class="next-label"><small>NEXT</small><strong>${next.dataset.label}</strong></span><span class="next-symbol">${nextIcon}<i></i></span>`;
-  section.appendChild(nextButton);
-  nextButton.addEventListener("click",()=>showPage(next.id));
-});
+  nextButton.innerHTML=`<span class="next-label"><small>NEXT</small><strong>${next.dataset.label}</strong></span><span class="next-symbol">${ico(next.id)}<i></i></span>`;
+  nextButton.classList.add("show");
+}
 
 // Kalender Desember 2026
 const calendarGrid=$("#calendarGrid");
@@ -299,9 +319,14 @@ function showPage(id){
     if(window.gsap&&!reducedMotion){gsap.set(progress,{scaleX:progressValue});}
     else{progress.style.transform=`scaleX(${progressValue})`;}
   }
+  updateNextButton(active);
   if(active&&window.gsap&&!reducedMotion){
     gsap.fromTo(active,{opacity:0,y:10,scale:.985},{opacity:1,y:0,scale:1,duration:.82,ease:"power3.out"});
-    if(id==="opening"){
+    if(id==="couple"){
+    const couple=$("#couple");
+    if(couple)couple.scrollTop=0;
+  }
+  if(id==="opening"){
       gsap.timeline({defaults:{ease:"power3.out"}})
         .from("#opening .opening-eyebrow",{y:12,opacity:0,duration:.75})
         .from("#opening .opening-portrait",{scale:.86,clipPath:"ellipse(28% 28% at 50% 50%)",opacity:0,duration:1.25},"-.3")
@@ -322,6 +347,7 @@ function showPage(id){
     }
   }
   active.scrollTop=0;
+  requestAnimationFrame(()=>{active.scrollTop=0;});
 }
 // reveal
 $$(".wrap > *").forEach(el=>el.classList.add("rv"));
@@ -331,8 +357,38 @@ showPage("opening");
 const audio=$("#audio"),mb=$("#music");
 const PLAY='<svg viewBox="0 0 24 24"><circle cx="9" cy="18" r="3"/><path d="M12 18V5l8-2v12"/><circle cx="17" cy="15" r="3"/></svg>';
 mb.innerHTML=PLAY;
-function setPlay(on){mb.classList.toggle("play",on);mb.setAttribute("aria-pressed",on);}
-mb.onclick=()=>{if(!CONFIG.music)return;audio.paused?audio.play().then(()=>setPlay(true)).catch(()=>{}):(audio.pause(),setPlay(false));};
+const savedMusicPreference=sessionStorage.getItem("weddingMusic");
+let musicWanted=savedMusicPreference=== "on";
+let musicPreferenceSet=savedMusicPreference!==null;
+function setPlay(on){
+  musicWanted=on;
+  musicPreferenceSet=true;
+  sessionStorage.setItem("weddingMusic",on?"on":"off");
+  mb.classList.toggle("play",on);
+  mb.setAttribute("aria-pressed",String(on));
+}
+mb.classList.toggle("play",musicWanted);
+mb.setAttribute("aria-pressed",String(musicWanted));
+mb.onclick=()=>{
+  if(!CONFIG.music)return;
+  if(audio.paused){
+    audio.play().then(()=>setPlay(true)).catch(()=>setPlay(false));
+  }else{
+    audio.pause();
+    setPlay(false);
+  }
+};
+function pauseMusic(){
+  audio.pause();
+  setPlay(false);
+}
+
+// Keluar tab, ganti aplikasi, atau menutup halaman: musik mati dan tombol Off.
+document.addEventListener("visibilitychange",()=>{
+  if(document.hidden)pauseMusic();
+});
+window.addEventListener("pagehide",pauseMusic);
+window.addEventListener("blur",pauseMusic);
 // open
 $("#open").onclick=()=>{
   const cover=$("#cover");
@@ -344,7 +400,16 @@ $("#open").onclick=()=>{
   }else{cover.classList.add("gone")}
   document.body.classList.remove("locked");
   setTimeout(()=>{if(!window.gsap||reducedMotion)cover.style.display="none";},1300);
-  if(CONFIG.music){audio.src=CONFIG.music;audio.play().then(()=>setPlay(true)).catch(()=>{});mb.classList.remove("hidden");}
+  if(CONFIG.music){
+    audio.src=CONFIG.music;
+    const shouldPlay=!musicPreferenceSet||musicWanted;
+    mb.classList.remove("hidden");
+    if(shouldPlay){
+      audio.play().then(()=>setPlay(true)).catch(()=>setPlay(false));
+    }else{
+      setPlay(false);
+    }
+  }
 };
 // RSVP
 $("#rsvpForm").addEventListener("submit",async e=>{
@@ -367,7 +432,7 @@ const hasGSAP = !reducedMotion && window.gsap && window.ScrollTrigger;
 if (hasGSAP) {
   gsap.registerPlugin(ScrollTrigger);
 
-  if (window.Lenis) {
+  if (window.Lenis && !window.matchMedia('(max-width:760px)').matches) {
     const lenis = new Lenis({lerp:.075, smoothWheel:true, wheelMultiplier:.82, touchMultiplier:.65});
     requestAnimationFrame(function scroll() {
       lenis.raf();
