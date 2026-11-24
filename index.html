@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>The Wedding of Aurelia & Reynard</title>
+<title>The Wedding of Angel & Ronaldo</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Playfair+Display:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
@@ -32,12 +32,18 @@
 <!-- A OPENING -->
 <section id="opening" data-label="Opening">
   <div class="fl tl"></div><div class="fl tr"></div><div class="fl bl"></div><div class="fl br"></div>
-  <div class="wrap center">
-    <p class="small">The Wedding of</p>
-    <div class="photo arch" data-photo="couple" data-init="A&amp;R"></div>
-    <h2 class="names big"><span data-k="bride.short"></span><em>&amp;</em><span data-k="groom.short"></span></h2>
-    <div class="rule"><i></i></div>
-    <p class="date" data-k="dateLabel"></p>
+  <div class="opening-frame" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+  <div class="wrap center opening-content">
+    <p class="small opening-eyebrow">THE WEDDING OF</p>
+    <div class="opening-portrait">
+      <span class="portrait-ornament ornament-top"></span>
+      <div class="photo arch" data-photo="couple" data-init="A&amp;R"></div>
+      <span class="portrait-ornament ornament-bottom"></span>
+    </div>
+    <h2 class="names big opening-names"><span data-k="bride.short"></span><em class="gold-ampersand">&amp;</em><span data-k="groom.short"></span></h2>
+    <div class="rule opening-rule"><i></i></div>
+    <p class="date opening-date" data-k="dateLabel"></p>
+    <p class="opening-journey">Two Souls, One Beautiful Journey</p>
   </div>
 </section>
 
@@ -69,30 +75,59 @@
   </div>
 </section>
 
-<!-- D LIVE -->
-<section id="live" data-label="Live" class="alt">
-  <div class="fl tl"></div><div class="fl br"></div>
-  <div class="wrap split">
-    <div class="photo arch sm" data-photo="live" data-init="Live"></div>
-    <div class="txt">
-      <p class="small">Dari mana pun Anda berada</p>
-      <h2 class="title">Wedding Live Streaming</h2>
-      <p>Saksikan prosesi pernikahan kami secara langsung.</p>
-      <p class="info" data-k="live.when"></p>
-      <a id="watch" class="btn" target="_blank" rel="noopener">Watch Live</a>
-    </div>
-  </div>
-</section>
-
 <!-- E ACARA -->
 <section id="acara" data-label="Acara">
   <div class="fl tr"></div><div class="fl bl"></div>
-  <div class="wrap">
+  <div class="wrap acara-wrap">
+    <p class="acara-eyebrow">THE CELEBRATION</p>
     <h2 class="title center">Rangkaian Acara</h2>
-    <div class="events">
-      <div class="ev"><h3>Akad Nikah</h3><p class="d" data-k="akad.day"></p><p class="t" data-k="akad.time"></p><p class="pl" data-k="akad.place"></p><p data-k="akad.addr"></p></div>
-      <div class="vl"></div>
-      <div class="ev"><h3>Resepsi</h3><p class="d" data-k="resepsi.day"></p><p class="t" data-k="resepsi.time"></p><p class="pl" data-k="resepsi.place"></p><p data-k="resepsi.addr"></p></div>
+    <div class="acara-layout">
+      <div class="events acara-cards">
+        <article class="ev acara-card akad-card">
+          <span class="card-botanical botanical-one"></span>
+          <div class="ceremony-icon ring-icon" aria-hidden="true">
+            <svg viewBox="0 0 64 64"><circle cx="25" cy="34" r="12"/><circle cx="39" cy="34" r="12"/><path d="M25 22c4-7 10-7 14 0"/></svg>
+          </div>
+          <p class="ceremony-label">AKAD NIKAH</p>
+          <h3>Akad Nikah</h3>
+          <p class="d" data-k="akad.day"></p>
+          <p class="t" data-k="akad.time"></p>
+          <div class="card-divider"><i></i></div>
+          <p class="pl" data-k="akad.place"></p>
+        </article>
+        <div class="vl"></div>
+        <article class="ev acara-card resepsi-card">
+          <span class="card-botanical botanical-two"></span>
+          <div class="ceremony-icon cake-icon" aria-hidden="true">
+            <svg viewBox="0 0 64 64"><path d="M17 49h30M20 49V36h24v13M24 36v-8h16v8M27 28V20h10v8M32 20v-7"/><circle cx="32" cy="10" r="2"/></svg>
+          </div>
+          <p class="ceremony-label">RESEPSI</p>
+          <h3>Resepsi</h3>
+          <p class="d" data-k="resepsi.day"></p>
+          <p class="t" data-k="resepsi.time"></p>
+          <div class="card-divider"><i></i></div>
+          <p class="pl" data-k="resepsi.place"></p>
+        </article>
+      </div>
+
+      <aside class="calendar-panel" aria-label="Kalender 28 Desember 2026">
+        <div class="calendar-floral calendar-floral-left"></div>
+        <div class="calendar-floral calendar-floral-right"></div>
+        <p class="calendar-month">Desember <span>2026</span></p>
+        <div class="calendar-weekdays"><span>Sen</span><span>Sel</span><span>Rab</span><span>Kam</span><span>Jum</span><span>Sab</span><span>Min</span></div>
+        <div class="calendar-grid" id="calendarGrid" aria-label="Desember 2026"></div>
+        <div class="calendar-save-wrap">
+          <button id="saveDate" class="save-date-btn" type="button" aria-haspopup="menu" aria-expanded="false">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4M17 3v4M3 10h18M8 14h3M13 14h3M8 17h3"/></svg>
+            <span>SIMPAN TANGGAL</span>
+          </button>
+          <div id="calendarMenu" class="calendar-menu" role="menu" aria-label="Pilihan kalender">
+            <button type="button" data-calendar="google" role="menuitem">Google Calendar</button>
+            <button type="button" data-calendar="apple" role="menuitem">Apple Calendar</button>
+            <button type="button" data-calendar="outlook" role="menuitem">Outlook Calendar</button>
+          </div>
+        </div>
+      </aside>
     </div>
   </div>
 </section>
@@ -147,6 +182,13 @@
 </section>
 </main>
 <audio id="audio" loop preload="none"></audio>
+<div id="pageProgress" aria-hidden="true"></div>
+<div id="softCursor" aria-hidden="true"></div>
+<div id="petalFall" aria-hidden="true"></div>
+<div id="rsvpSuccess" aria-hidden="true"><svg viewBox="0 0 80 80"><circle cx="40" cy="40" r="34"/><path d="M24 41l11 11 22-24"/></svg><span>Konfirmasi terkirim</span></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js"></script>
 <script src="script.js"></script>
 </body>
 </html>

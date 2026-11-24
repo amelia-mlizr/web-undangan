@@ -1,81 +1,184 @@
 /* ============ KONFIGURASI — ganti data di sini ============ */
 const CONFIG = {
-  bride:{short:"Aurelia",full:"Aurelia Putri Maharani",parents:"Putri dari Bapak Hendra Maharani & Ibu Sekar Ayu",
-    bio:"Seorang arsitek lanskap yang mencintai taman, kopi pagi, dan buku tua. Ia percaya bahwa cinta tumbuh seperti kebun: sabar dan dirawat setiap hari."},
-  groom:{short:"Reynard",full:"Reynard Adhitama Wijaya",parents:"Putra dari Bapak Surya Wijaya & Ibu Laras Kinanti",
-    bio:"Seorang dokter muda yang gemar mendaki gunung dan memotret senja. Bersamanya, ia menemukan rumah yang selama ini dicari."},
-  weddingDate:"2027-02-14T09:00:00",
-  dateShort:"14 . 02 . 2027",
-  dateLabel:"Minggu, 14 Februari 2027",
-  quote:{text:"Dan di antara tanda-tanda kebesaran-Nya ialah Dia menciptakan pasangan untukmu agar kamu merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang.",by:"QS. Ar-Rum : 21"},
-  live:{when:"Minggu, 14 Februari 2027 · 09.00 WIB", url:"https://www.youtube.com/@your-channel/live"},
-  akad:{day:"Minggu, 14 Februari 2027",time:"09.00 – 10.30 WIB",place:"Masjid Raya Al-Mashun",addr:"Jl. Sisingamangaraja No. 61, Medan"},
-  resepsi:{day:"Minggu, 14 Februari 2027",time:"11.30 – 14.00 WIB",place:"The Grand Ballroom Medan",addr:"Jl. Diponegoro No. 18, Medan"},
-  maps:{name:"The Grand Ballroom Medan",addr:"Jl. Diponegoro No. 18, Medan, Sumatera Utara",
-    embed:"https://www.google.com/maps?q=Medan+Grand+Ballroom&output=embed", link:"https://www.google.com/maps/search/?api=1&query=Medan+Grand+Ballroom"},
-  rsvp:{whatsapp:"6281234567890", sheetsUrl:""},   // sheetsUrl: URL Google Apps Script Web App (opsional)
-  inviters:[{label:"Keluarga Mempelai Wanita",names:["Bapak Hendra Maharani","Ibu Sekar Ayu"]},{label:"Keluarga Mempelai Pria",names:["Bapak Surya Wijaya","Ibu Laras Kinanti"]},{label:"Dan Segenap Keluarga Besar",names:[]}],
-  thanks:{text:"Merupakan kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu.",closing:"Dua jiwa, satu cerita — dan kini kami menuliskannya bersama."},
-  photos:{couple:"",bride:"",groom:"",live:"",thanks:""},  // isi URL foto, mis. "foto/couple.jpg"
-  music:""   // isi path lagu, mis. "musik/lagu.mp3"
+  bride: {
+    short: "Angel",
+    full: "Angelica Silitonga",
+    parents: "Putri dari Bapak R.Silitonga & Ibu S. Br Hasibuan",
+    bio: "Wanita yang hangat dan penuh perhatian. Ia senang berbagi kebahagiaan, menghargai hal-hal sederhana, dan selalu berusaha tumbuh menjadi pribadi yang lebih baik."
+  },
+  groom: {
+    short: "Ronaldo",
+    full: "Ronaldo Gultom",
+    parents: "Putra dari Bapak B Gultom & Ibu R br Butar butar",
+    bio: "Pria yang rendah hati, bertanggung jawab, dan peduli kepada orang-orang di sekitarnya. Ia menyukai hal-hal baru serta percaya pada arti kebersamaan."
+  },
+  weddingDate: "2027-02-14T09:00:00",
+  dateShort: "28 . 12 . 2026",
+  dateLabel: "Senin, 28 Desember 2026",
+  quote: {
+    text: "Kasih sayangku seluas lautan dan cintaku sedalam samudra. Semakin banyak cinta yang kuberikan kepadamu, semakin besar pula cinta yang tumbuh, karena cinta sejati tidak pernah kehabisan ruang untuk bertambah.",
+    by: "William Shakespeare — Romeo and Juliet (1597)"
+  },
+  akad: {
+    day: "Senin, 28 Desember 2026",
+    time: "10.00 – 11.00 WIB",
+    place: "Sampuara kabupaten Toba",
+  },
+  resepsi: {
+    day: "Senin, 28 Desember 2026",
+    time: "10.00 – 11.00 WIB",
+    place: "Sampuara kabupaten Toba",
+  },
+  maps: {
+    name: "Sampura",
+    addr: "Kec. Bonatua Lunasi, Kabupaten Toba, Sumatera Utara",
+    embed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15943.937130587943!2d99.1186015!3d2.5120255!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3031f94bfb303f51%3A0xba83106b55d851ff!2sSampuara%2C%20Kec.%20Bonatua%20Lunasi%2C%20Kabupaten%20Toba%2C%20Sumatera%20Utara!5e0!3m2!1sid!2sid!4v1795452584328!5m2!1sid!2sid",
+    link: "https://maps.app.goo.gl/q4fBrDwtKgUXgrCz6"
+  },
+  rsvp: {
+    whatsapp: "62813902112246",
+    sheetsUrl: ""
+  },
+  inviters: [
+    {label: "Keluarga Mempelai Wanita", names: ["Bapak R.Silitonga", "Ibu S. Br Hasibuan"]},
+    {label: "Keluarga Mempelai Pria", names: ["Bapak B. Gultom", "Ibu R.br Butar butar"]},
+    {label: "Dan Segenap Keluarga Besar", names: []}
+  ],
+  thanks: {
+    text: "Merupakan kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu.",
+    closing: "Dua jiwa, satu cerita — dan kini kami menuliskannya bersama."
+  },
+  photos: {
+    couple: "photos/couple.jpeg",
+    bride: "photos/bride.jpeg",
+    groom: "photos/groom.jpeg",
+    thanks: "photos/thanks.jpeg"
+  },
+  music: "music.mp3"
 };
 
 /* ============ UTIL ============ */
 const $=(s,c=document)=>c.querySelector(s),$$=(s,c=document)=>[...c.querySelectorAll(s)];
+const reducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 let seed=7;const rnd=()=>(seed=(seed*16807)%2147483647)/2147483647;
 const f=n=>n.toFixed(1);
 
-/* ============ BOTANICAL GENERATOR ============ */
-const P="M0 0C-.62 -.18 -.82 -.82 0 -1C.82 -.82 .62 -.18 0 0Z";
-function bloom(cx,cy,R,layers,cols,stroke,rot=0){
-  let g=`<g transform="translate(${cx} ${cy}) rotate(${rot})">`;
-  for(let l=0;l<layers;l++){
-    const n=5+Math.floor(l*1.4),r=R*(1-l*.8/layers),c=cols[Math.min(l,cols.length-1)],off=l*37+rnd()*20;
-    for(let i=0;i<n;i++){const a=off+i*360/n+rnd()*8-4,s=r*(.88+rnd()*.2);
-      g+=`<path d="${P}" transform="rotate(${f(a)}) scale(${f(s)})" fill="${c}" fill-opacity="${.78+l*.04}" stroke="${stroke}" stroke-opacity=".35" stroke-width=".7" vector-effect="non-scaling-stroke"/>`;}
+/* ============ BOTANICAL GENERATOR — premium watercolor edition ============ */
+let botanicalId = 0;
+const petalPath = (turn = 0) => {
+  const w = 6 + rnd() * 3;
+  const x = 8 + rnd() * 3;
+  return `M0 0 C-${f(w)} -${f(8 + rnd() * 5)} -${f(x)} -${f(24 + rnd() * 6)} 0 -${f(34 + rnd() * 7)} C${f(x)} -${f(24 + rnd() * 6)} ${f(w)} -${f(8 + rnd() * 5)} 0 0Z`;
+};
+function bloom(cx, cy, R, layers, cols, stroke, rot = 0) {
+  botanicalId++;
+  let g = `<g transform="translate(${cx} ${cy}) rotate(${rot})" filter="url(#petalShadow)">`;
+  for (let l = 0; l < layers; l++) {
+    const n = 7 + l * 2;
+    const r = R * (1 - l * 0.72 / layers);
+    const c = cols[Math.min(l, cols.length - 1)];
+    const c2 = cols[Math.min(l + 1, cols.length - 1)];
+    const off = l * 31 + rnd() * 24;
+    g += `<defs><radialGradient id="botanical${botanicalId}-${l}" cx="35%" cy="28%" r="76%"><stop offset="0" stop-color="#fffaf4" stop-opacity=".82"/><stop offset=".35" stop-color="${c}" stop-opacity=".96"/><stop offset="1" stop-color="${c2}" stop-opacity=".72"/></radialGradient></defs>`;
+    for (let i = 0; i < n; i++) {
+      const a = off + i * (360 / n) + rnd() * 7 - 3.5;
+      const s = r * (.78 + rnd() * .24);
+      const stretch = .84 + rnd() * .28;
+      g += `<path d="${petalPath()}" transform="rotate(${f(a)}) scale(${f(s / 34)} ${f(s * stretch / 34)})" fill="url(#botanical${botanicalId}-${l})" fill-opacity="${f(.78 + rnd() * .16)}" stroke="${stroke}" stroke-opacity=".28" stroke-width=".55" vector-effect="non-scaling-stroke"/>`;
+    }
   }
-  return g+`<circle r="${R*.07}" fill="${stroke}" fill-opacity=".5"/></g>`;
+  g += `<circle r="${R * .075}" fill="#c7a85d" fill-opacity=".72"/><circle r="${R * .025}" fill="#6d5535" fill-opacity=".82"/>`;
+  return g + `</g>`;
 }
-const rose=(x,y,R)=>bloom(x,y,R,5,["#d9a9a6","#cf9490","#c58682","#b87874","#a76a67"],"#7d4745",rnd()*60);
-const peony=(x,y,R)=>bloom(x,y,R,7,["#f1d5d0","#ebc3bf","#e3b2ae","#da9f9d","#cf8e8c","#c07f7d","#b27070"],"#8a5552",rnd()*60);
-const ranunc=(x,y,R)=>bloom(x,y,R,8,["#f4dcc0","#efcfa9","#e8c093","#e0b07f","#d6a06e","#cc925f","#c18455","#b6794c"],"#8a5a37",rnd()*60);
-function anemone(x,y,R){let g=`<g transform="translate(${x} ${y}) rotate(${rnd()*60})">`;
-  for(let i=0;i<7;i++)g+=`<path d="${P}" transform="rotate(${i*51.4}) scale(${R})" fill="#fbf6ee" stroke="#a89b87" stroke-opacity=".5" stroke-width=".7" vector-effect="non-scaling-stroke"/>`;
-  g+=`<circle r="${R*.2}" fill="#3a3550"/>`;
-  for(let i=0;i<16;i++){const a=i*22.5*Math.PI/180;g+=`<circle cx="${f(Math.cos(a)*R*.3)}" cy="${f(Math.sin(a)*R*.3)}" r="1.1" fill="#3a3550"/>`}
-  return g+"</g>";}
-function jasmine(x,y,R){let g=`<g transform="translate(${x} ${y}) rotate(${rnd()*72})">`;
-  for(let i=0;i<5;i++)g+=`<path d="M0 0C-.3 -.3 -.3 -.9 0 -1C.3 -.9 .3 -.3 0 0Z" transform="rotate(${i*72}) scale(${R})" fill="#fffdf7" stroke="#bdb39e" stroke-opacity=".6" stroke-width=".6" vector-effect="non-scaling-stroke"/>`;
-  return g+`<circle r="1.6" fill="#d8bd7e"/></g>`;}
-function branch(x0,y0,x1,y1,bend,n,col){
-  const mx=(x0+x1)/2+bend,my=(y0+y1)/2-bend;
-  let g=`<path d="M${x0} ${y0}Q${mx} ${my} ${x1} ${y1}" fill="none" stroke="#6b7258" stroke-width="1.6"/>`;
-  for(let i=1;i<=n;i++){const t=i/(n+1),u=1-t,
-    px=u*u*x0+2*u*t*mx+t*t*x1,py=u*u*y0+2*u*t*my+t*t*y1,
-    tx=2*u*(mx-x0)+2*t*(x1-mx),ty=2*u*(my-y0)+2*t*(y1-my),a=Math.atan2(ty,tx)*180/Math.PI,side=i%2?1:-1,sz=15+rnd()*9;
-    g+=`<g transform="translate(${f(px)} ${f(py)}) rotate(${f(a+side*(55+rnd()*15))})"><ellipse cx="${sz/2}" rx="${sz/2}" ry="${sz*.36}" fill="${col[i%col.length]}" fill-opacity=".85" stroke="#59613f" stroke-opacity=".4" stroke-width=".6"/><path d="M0 0H${sz}" stroke="#59613f" stroke-opacity=".35" stroke-width=".5"/></g>`;}
+const rose = (x, y, R) => bloom(x, y, R, 6, ["#f1d8d4", "#ddaead", "#c98f91", "#b97577", "#a86267"], "#8d5b58", rnd() * 360);
+const peony = (x, y, R) => bloom(x, y, R, 8, ["#fff5ed", "#f0d0c9", "#dfb1aa", "#d09a96", "#b87d7b"], "#9b6864", rnd() * 360);
+const ranunc = (x, y, R) => bloom(x, y, R, 9, ["#fbebd7", "#efd2ad", "#dfb789", "#d09f72", "#b9875d"], "#9b7249", rnd() * 360);
+function anemone(x, y, R) {
+  botanicalId++;
+  let g = `<g transform="translate(${x} ${y}) rotate(${rnd() * 360})" filter="url(#petalShadow)">`;
+  for (let i = 0; i < 9; i++) {
+    const s = R * (.82 + rnd() * .24);
+    g += `<path d="${petalPath()}" transform="rotate(${i * 40 + rnd() * 5}) scale(${f(s / 34)})" fill="#fbf8ef" fill-opacity="${f(.76 + rnd() * .2)}" stroke="#a89b87" stroke-opacity=".48" stroke-width=".55" vector-effect="non-scaling-stroke"/>`;
+  }
+  g += `<circle r="${R * .18}" fill="#454447"/><circle r="${R * .11}" fill="#5a4d3b" fill-opacity=".92"/>`;
+  for (let i = 0; i < 18; i++) {
+    const a = i * 20 * Math.PI / 180;
+    g += `<circle cx="${f(Math.cos(a) * R * (.18 + rnd() * .15))}" cy="${f(Math.sin(a) * R * (.18 + rnd() * .15))}" r="${f(.75 + rnd() * .9)}" fill="${i % 3 ? "#c7a85d" : "#77705b"}" fill-opacity=".82"/>`;
+  }
+  return g + `</g>`;
+}
+function jasmine(x, y, R) {
+  let g = `<g transform="translate(${x} ${y}) rotate(${rnd() * 72})" filter="url(#petalShadow)">`;
+  for (let i = 0; i < 5; i++) {
+    g += `<path d="M0 0C-${f(R * .3)} -${f(R * .32)} -${f(R * .28)} -${f(R * .86)} 0 -${R}C${f(R * .28)} -${f(R * .86)} ${f(R * .3)} -${f(R * .32)} 0 0Z" transform="rotate(${i * 72 + rnd() * 4}) scale(.88 1)" fill="#fffdf8" fill-opacity="${f(.82 + rnd() * .16)}" stroke="#bdb39e" stroke-opacity=".46" stroke-width=".55"/>`;
+  }
+  g += `<circle r="${f(R * .14)}" fill="#d8bd7e"/><circle r="${f(R * .055)}" fill="#a88a45"/>`;
+  return g + `</g>`;
+}
+function branch(x0, y0, x1, y1, bend, n, col) {
+  const mx = (x0 + x1) / 2 + bend;
+  const my = (y0 + y1) / 2 - bend;
+  let g = `<path d="M${x0} ${y0}Q${mx} ${my} ${x1} ${y1}" fill="none" stroke="#69744f" stroke-width="1.35" stroke-opacity=".82"/><path d="M${x0 + 1} ${y0 + 1}Q${mx + 1} ${my + 1} ${x1 + 1} ${y1 + 1}" fill="none" stroke="#c7a85d" stroke-width=".28" stroke-opacity=".42"/>`;
+  for (let i = 1; i <= n; i++) {
+    const t = i / (n + 1), u = 1 - t;
+    const px = u * u * x0 + 2 * u * t * mx + t * t * x1;
+    const py = u * u * y0 + 2 * u * t * my + t * t * y1;
+    const tx = 2 * u * (mx - x0) + 2 * t * (x1 - mx);
+    const ty = 2 * u * (my - y0) + 2 * t * (y1 - my);
+    const a = Math.atan2(ty, tx) * 180 / Math.PI;
+    const side = i % 2 ? 1 : -1;
+    const sz = 10 + rnd() * 13;
+    const sy = sz * (.34 + rnd() * .18);
+    const color = i % 4 === 0 ? "#c1cbad" : col[i % col.length];
+    g += `<g transform="translate(${f(px)} ${f(py)}) rotate(${f(a + side * (48 + rnd() * 18))})"><ellipse cx="${f(sz * .48)}" rx="${f(sz * .52)}" ry="${f(sy)}" fill="${color}" fill-opacity="${f(.82 + rnd() * .12)}" stroke="#5d6848" stroke-opacity=".38" stroke-width=".45"/><path d="M0 ${f(sy * .15)}Q${f(sz * .48)} ${f(sy * .05)} ${sz} 0" fill="none" stroke="#66744f" stroke-opacity=".42" stroke-width=".38"/><circle cx="${sz}" cy="0" r=".7" fill="#b8975a" fill-opacity=".58"/></g>`;
+  }
   return g;
 }
-function cluster(v){
-  seed=11+v*5;const sage=["#9aa98d","#8a9b80","#a9b69c","#7f9076"],olive=["#6b7650","#5d6a45"];
-  let s=`<svg viewBox="0 0 420 420" xmlns="http://www.w3.org/2000/svg"><g filter="url(#wc)">`;
-  s+=branch(-10,-10,400,90,40,13,sage)+branch(-10,-10,70,400,-40,13,sage)+branch(-10,-10,310,240,-30,9,olive);
-  s+=branch(40,10,230,-10+v*10,-20,6,sage);
-  s+=peony(105,100,72)+rose(215,58,40)+rose(52,218,42)+ranunc(172,172,36)+anemone(262,128,30)+anemone(108,265,28)+peony(310,40,26)+rose(30,330,24);
-  [[185,110],[250,205],[130,190],[330,95],[90,330],[215,255],[40,120],[160,32]].forEach(([x,y])=>s+=jasmine(x,y,11+rnd()*5));
-  for(let i=0;i<9;i++)s+=`<circle cx="${f(60+rnd()*280)}" cy="${f(40+rnd()*200)}" r="${f(1.8+rnd()*1.6)}" fill="${i%2?"#c99a98":"#b8975a"}" fill-opacity=".8"/>`;
-  return s+"</g></svg>";
+function cluster(v) {
+  seed = 101 + v * 19;
+  const sage = ["#8fa181", "#9da98e", "#b1baa0", "#7d9072"];
+  const olive = ["#69764f", "#5d6945", "#7d8661"];
+  let s = `<svg viewBox="0 0 420 420" xmlns="http://www.w3.org/2000/svg"><defs><filter id="petalShadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="1.2" dy="2" stdDeviation="1.8" flood-color="#5d5144" flood-opacity=".16"/><feGaussianBlur stdDeviation=".08"/></filter></defs><g filter="url(#wc)">`;
+  s += branch(-18, -12, 392, 92, 38, 12, sage);
+  s += branch(-14, 0, 76, 410, -42, 14, sage);
+  s += branch(410, 0, 270, 260, 58, 9, olive);
+  s += branch(10, 402, 205, 356, -35, 7, sage);
+  s += peony(118, 112, 82);
+  s += rose(244, 72, 48);
+  s += ranunc(176, 188, 42);
+  s += anemone(304, 138, 34);
+  s += rose(54, 250, 44);
+  s += peony(330, 300, 30);
+  s += ranunc(82, 342, 26);
+  [[200, 92], [278, 212], [146, 278], [360, 96], [102, 300], [224, 322], [44, 138], [360, 198]].forEach(([x, y], i) => s += jasmine(x, y, 9 + (i % 4) * 2));
+  for (let i = 0; i < 14; i++) {
+    const x = 44 + rnd() * 315, y = 42 + rnd() * 310;
+    s += `<circle cx="${f(x)}" cy="${f(y)}" r="${f(.8 + rnd() * 1.25)}" fill="${i % 3 === 0 ? "#b8975a" : "#c99a98"}" fill-opacity="${f(.52 + rnd() * .28)}"/>`;
+  }
+  s += `<path d="M32 380C92 356 132 378 172 348C218 314 258 342 310 302" fill="none" stroke="#b8975a" stroke-width=".7" stroke-opacity=".65"/>`;
+  return s + `</g></svg>`;
 }
-const CL=[cluster(0),cluster(1),cluster(2)];
-function smallCluster(){seed=99;let s=`<svg viewBox="0 0 200 200"><g filter="url(#wc)">`+branch(190,190,40,60,-20,7,["#9aa98d","#8a9b80"])+branch(190,190,60,180,25,6,["#7f9076","#a9b69c"]);
-  s+=rose(130,130,36)+peony(80,150,28)+anemone(150,70,22)+jasmine(105,95,10)+jasmine(55,110,9)+jasmine(165,150,9);return s+"</g></svg>";}
+const CL = [cluster(0), cluster(1), cluster(2)];
+function smallCluster() {
+  seed = 303;
+  let s = `<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><defs><filter id="petalShadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="1" dy="1.5" stdDeviation="1.4" flood-color="#5d5144" flood-opacity=".14"/></filter></defs><g filter="url(#wc)">`;
+  s += branch(194, 194, 42, 54, -24, 8, ["#9aa98d", "#7f9076"]);
+  s += branch(196, 196, 65, 180, 28, 7, ["#a9b69c", "#69764f"]);
+  s += peony(122, 128, 46);
+  s += rose(72, 154, 28);
+  s += anemone(154, 78, 25);
+  s += jasmine(96, 82, 10);
+  s += jasmine(52, 112, 9);
+  s += jasmine(166, 148, 8);
+  s += `<path d="M28 176C78 150 112 162 158 112" fill="none" stroke="#b8975a" stroke-width=".55" stroke-opacity=".58"/>`;
+  return s + `</g></svg>`;
+}
 
 /* ============ ICONS ============ */
 const ICONS={
  opening:'<rect x="3" y="5" width="18" height="14" rx="1"/><path d="m3 6 9 7 9-7"/>',
  quotes:'<path d="M9 7H6v5h3v3c0 1-1 2-2 2M18 7h-3v5h3v3c0 1-1 2-2 2"/>',
  couple:'<circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 20c0-4 3-6 6-6s6 2 6 6M15 14c4-1 6 1 6 6"/>',
- live:'<circle cx="12" cy="12" r="1.6"/><path d="M8 8a5.5 5.5 0 0 0 0 8M16 8a5.5 5.5 0 0 1 0 8M5 5a10 10 0 0 0 0 14M19 5a10 10 0 0 1 0 14"/>',
  acara:'<rect x="4" y="5" width="16" height="15" rx="1"/><path d="M4 10h16M9 3v4M15 3v4"/>',
  maps:'<path d="M12 21s-6-5.5-6-11a6 6 0 0 1 12 0c0 5.5-6 11-6 11z"/><circle cx="12" cy="10" r="2"/>',
  rsvp:'<circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/>',
@@ -96,26 +199,128 @@ $$("[data-photo]").forEach(el=>{const u=CONFIG.photos[el.dataset.photo];
 // guest dari ?to=Nama
 const to=new URLSearchParams(location.search).get("to");if(to)$("#guest").textContent=to;
 // links
-$("#watch").href=CONFIG.live.url;$("#maplink").href=CONFIG.maps.link;$("#mapiframe").src=CONFIG.maps.embed;
+$("#maplink").href=CONFIG.maps.link;$("#mapiframe").src=CONFIG.maps.embed;
 $("#inviters").innerHTML=CONFIG.inviters.map(g=>`<small>${g.label}</small>`+g.names.map(n=>`<p>${n}</p>`).join("")).join("");
 // nav
 const secs=$$("main section");
 $("#nav").innerHTML=secs.map(s=>`<a href="#${s.id}" aria-label="${s.dataset.label}" title="${s.dataset.label}" data-id="${s.id}">${ico(s.id)}<span>${s.dataset.label}</span></a>`).join("");
 $$("#nav a").forEach(a=>a.addEventListener("click",e=>{e.preventDefault();showPage(a.dataset.id);}));
+
+secs.forEach((section,index)=>{
+  const next=secs[(index+1)%secs.length];
+  const nextIcon=ico(next.id);
+  const nextButton=document.createElement("button");
+  nextButton.type="button";
+  nextButton.className="next-page-btn";
+  nextButton.dataset.target=next.id;
+  nextButton.setAttribute("aria-label",`Lanjut ke ${next.dataset.label}`);
+  nextButton.innerHTML=`<span class="next-label"><small>NEXT</small><strong>${next.dataset.label}</strong></span><span class="next-symbol">${nextIcon}<i></i></span>`;
+  section.appendChild(nextButton);
+  nextButton.addEventListener("click",()=>showPage(next.id));
+});
+
+// Kalender Desember 2026
+const calendarGrid=$("#calendarGrid");
+if(calendarGrid){
+  for(let offset=0;offset<1;offset++){
+    calendarGrid.insertAdjacentHTML("beforeend",'<span class="calendar-day empty"></span>');
+  }
+  for(let day=1;day<=31;day++){
+    calendarGrid.insertAdjacentHTML("beforeend",`<span class="calendar-day${day===28?' selected':''}">${day}</span>`);
+  }
+}
+
+const saveDate=$("#saveDate");
+const calendarMenu=$("#calendarMenu");
+if(saveDate&&calendarMenu){
+  saveDate.addEventListener("click",()=>{
+    const open=!calendarMenu.classList.contains("open");
+    calendarMenu.classList.toggle("open",open);
+    saveDate.setAttribute("aria-expanded",String(open));
+  });
+  document.addEventListener("click",e=>{if(!e.target.closest(".calendar-save-wrap")){calendarMenu.classList.remove("open");saveDate.setAttribute("aria-expanded","false")}});
+}
+
+const calendarEvent={
+  title:`Pernikahan ${CONFIG.bride.short} & ${CONFIG.groom.short}`,
+  location:CONFIG.akad.place,
+  start:"20261228T100000",
+  end:"20261228T110000",
+  isoStart:"2026-12-28T10:00:00+07:00",
+  isoEnd:"2026-12-28T11:00:00+07:00",
+  details:"Akad Nikah dan Resepsi - Pernikahan Angel & Ronaldo"
+};
+
+function downloadICS(){
+  const now=new Date().toISOString().replace(/[-:]/g,"").replace(/\.\d{3}Z$/,"Z");
+  const ics=["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Wedding Invitation//EN","CALSCALE:GREGORIAN","BEGIN:VTIMEZONE","TZID:Asia/Jakarta","BEGIN:STANDARD","TZOFFSETFROM:+0700","TZOFFSETTO:+0700","DTSTART:19700101T000000","TZNAME:WIB","END:STANDARD","END:VTIMEZONE","BEGIN:VEVENT",`UID:${now}-wedding@example.com`,`DTSTAMP:${now}`,"DTSTART;TZID=Asia/Jakarta:20261228T100000","DTEND;TZID=Asia/Jakarta:20261228T110000",`SUMMARY:${calendarEvent.title}`,`LOCATION:${calendarEvent.location}`,`DESCRIPTION:${calendarEvent.details}`,"END:VEVENT","END:VCALENDAR"].join("\r\n");
+  const blob=new Blob([ics],{type:"text/calendar;charset=utf-8"});
+  const url=URL.createObjectURL(blob);
+  const link=document.createElement("a");link.href=url;link.download="pernikahan-angel-ronaldo.ics";document.body.appendChild(link);link.click();link.remove();URL.revokeObjectURL(url);
+}
+
+if(calendarMenu){
+  $$("[data-calendar]",calendarMenu).forEach(button=>button.addEventListener("click",()=>{
+    const type=button.dataset.calendar;
+    if(type==="google"){
+      const url=`https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(calendarEvent.title)}&dates=${calendarEvent.start}/${calendarEvent.end}&details=${encodeURIComponent(calendarEvent.details)}&location=${encodeURIComponent(calendarEvent.location)}&ctz=Asia/Jakarta`;
+      window.open(url,"_blank","noopener");
+    }else if(type==="apple")downloadICS();
+    else if(type==="outlook"){
+      const url=`https://outlook.live.com/calendar/0/deeplink/compose?subject=${encodeURIComponent(calendarEvent.title)}&startdt=${encodeURIComponent(calendarEvent.isoStart)}&enddt=${encodeURIComponent(calendarEvent.isoEnd)}&body=${encodeURIComponent(calendarEvent.details)}&location=${encodeURIComponent(calendarEvent.location)}`;
+      window.open(url,"_blank","noopener");
+    }
+    calendarMenu.classList.remove("open");saveDate.setAttribute("aria-expanded","false");
+  }));
+}
+
 function showPage(id){
   const active=secs.find(s=>s.id===id);
   if(!active)return;
+  const previous=$("main section.active");
+  if(previous&&previous!==active&&window.gsap&&!reducedMotion){
+    gsap.to(previous,{opacity:0,y:-8,duration:.38,ease:"power3.out",onComplete:()=>{previous.style.transform="";}});
+  }
   secs.forEach(s=>{
     const selected=s===active;
     s.classList.toggle("active",selected);
     s.setAttribute("aria-hidden",String(!selected));
-    if(selected)$$(".rv",s).forEach(el=>el.classList.add("in"));
+    if(selected)$$('.rv',s).forEach(el=>el.classList.add('in'));
   });
   $$("#nav a").forEach(a=>{
     const selected=a.dataset.id===id;
     a.classList.toggle("on",selected);
     a.setAttribute("aria-current",selected?"page":"false");
   });
+  const progress=$("#pageProgress");
+  if(progress){
+    const index=secs.indexOf(active);
+    const progressValue=(index+1)/secs.length;
+    if(window.gsap&&!reducedMotion){gsap.set(progress,{scaleX:progressValue});}
+    else{progress.style.transform=`scaleX(${progressValue})`;}
+  }
+  if(active&&window.gsap&&!reducedMotion){
+    gsap.fromTo(active,{opacity:0,y:10,scale:.985},{opacity:1,y:0,scale:1,duration:.82,ease:"power3.out"});
+    if(id==="opening"){
+      gsap.timeline({defaults:{ease:"power3.out"}})
+        .from("#opening .opening-eyebrow",{y:12,opacity:0,duration:.75})
+        .from("#opening .opening-portrait",{scale:.86,clipPath:"ellipse(28% 28% at 50% 50%)",opacity:0,duration:1.25},"-.3")
+        .from("#opening .opening-names span,#opening .opening-names .gold-ampersand",{y:18,opacity:0,duration:.78,stagger:.16},"-.55")
+        .from("#opening .opening-rule",{scaleX:0,transformOrigin:"center",duration:.85},"-.45")
+        .from("#opening .opening-date,#opening .opening-journey",{y:10,opacity:0,duration:.75,stagger:.12},"-.35");
+    }
+    if(id==="acara"){
+      gsap.timeline({defaults:{ease:"power3.out"}})
+        .from("#acara .acara-eyebrow,#acara .title",{y:14,opacity:0,duration:.8,stagger:.12})
+        .from("#acara .akad-card",{x:-28,scale:.94,opacity:0,duration:1.05},"-.45")
+        .from("#acara .vl",{scaleY:0,transformOrigin:"top",duration:.95},"-.7")
+        .from("#acara .resepsi-card",{x:28,scale:.94,opacity:0,duration:1.05},"-.8")
+        .from("#acara .ev .d,#acara .ev .t,#acara .ev .pl",{y:8,opacity:0,duration:.65,stagger:.08},"-.55")
+        .from("#acara .calendar-panel",{rotateY:-8,scale:.94,clipPath:"inset(0 0 100% 0)",opacity:0,duration:1.2},"-.6")
+        .from("#acara .calendar-day:not(.empty)",{y:8,opacity:0,duration:.45,stagger:.018},"-.45")
+        .from("#acara .save-date-btn",{y:12,opacity:0,duration:.8},"-.25");
+    }
+  }
   active.scrollTop=0;
 }
 // reveal
@@ -130,8 +335,15 @@ function setPlay(on){mb.classList.toggle("play",on);mb.setAttribute("aria-presse
 mb.onclick=()=>{if(!CONFIG.music)return;audio.paused?audio.play().then(()=>setPlay(true)).catch(()=>{}):(audio.pause(),setPlay(false));};
 // open
 $("#open").onclick=()=>{
-  $("#cover").classList.add("gone");document.body.classList.remove("locked");
-  setTimeout(()=>{$("#cover").style.display="none";},1200);
+  const cover=$("#cover");
+  if(window.gsap&&!reducedMotion){
+    cover.classList.add("curtain-out");
+    gsap.timeline({onComplete:()=>{cover.style.display="none";}})
+      .to(".cover-in",{scale:.96,opacity:0,duration:.75,ease:"power3.out"})
+      .to(cover,{scale:1.08,opacity:0,duration:.72,ease:"power3.inOut"},"-.35");
+  }else{cover.classList.add("gone")}
+  document.body.classList.remove("locked");
+  setTimeout(()=>{if(!window.gsap||reducedMotion)cover.style.display="none";},1300);
   if(CONFIG.music){audio.src=CONFIG.music;audio.play().then(()=>setPlay(true)).catch(()=>{});mb.classList.remove("hidden");}
 };
 // RSVP
@@ -140,5 +352,32 @@ $("#rsvpForm").addEventListener("submit",async e=>{
   if(CONFIG.rsvp.sheetsUrl){try{await fetch(CONFIG.rsvp.sheetsUrl,{method:"POST",mode:"no-cors",body:JSON.stringify(d)});st.textContent="Terima kasih, konfirmasi Anda telah terkirim.";}catch{st.textContent="Pengiriman gagal. Coba lagi sebentar.";}}
   const msg=`Konfirmasi Kehadiran — ${CONFIG.bride.short} & ${CONFIG.groom.short}\nNama: ${d.nama}\nJumlah: ${d.jumlah} orang\nKehadiran: ${d.hadir}\nUcapan: ${d.ucapan||"-"}`;
   if(CONFIG.rsvp.whatsapp){window.open(`https://wa.me/${CONFIG.rsvp.whatsapp}?text=${encodeURIComponent(msg)}`,"_blank");st.textContent=st.textContent||"Melanjutkan ke WhatsApp…";}
+  const success=$("#rsvpSuccess");
+  if(success&&!reducedMotion){
+    success.classList.add("show");
+    gsap.fromTo(success,{y:18,opacity:0},{y:0,opacity:1,duration:.8,ease:"power3.out"});
+    gsap.to("#rsvpSuccess circle,#rsvpSuccess path",{strokeDashoffset:0,duration:.9,stagger:.12,ease:"power3.out"});
+  }
   e.target.reset();
 });
+
+/* ============ CINEMATIC PREMIUM MOTION ============ */
+const hasGSAP = !reducedMotion && window.gsap && window.ScrollTrigger;
+
+if (hasGSAP) {
+  gsap.registerPlugin(ScrollTrigger);
+
+  if (window.Lenis) {
+    const lenis = new Lenis({lerp:.075, smoothWheel:true, wheelMultiplier:.82, touchMultiplier:.65});
+    requestAnimationFrame(function scroll() {
+      lenis.raf();
+      requestAnimationFrame(scroll);
+    });
+    lenis.on("scroll", ({scroll})=>{
+      const progress = scroll / (document.body.scrollHeight - window.innerHeight);
+      gsap.set("#pageProgress",{scaleX:progress});
+    });
+  }
+
+  // Page-based navigation: setiap section hanya dianimasikan saat aktif.
+}
