@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The Wedding of Angel & Ronaldo</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Playfair+Display:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css?v=20261124-2">
 </head>
@@ -91,8 +92,8 @@
           <div class="ceremony-icon ring-icon" aria-hidden="true">
             <svg viewBox="0 0 64 64"><circle cx="25" cy="34" r="12"/><circle cx="39" cy="34" r="12"/><path d="M25 22c4-7 10-7 14 0"/></svg>
           </div>
-          <p class="ceremony-label">AKAD NIKAH</p>
-          <h3>Akad Nikah</h3>
+          <p class="ceremony-label">PEMBERKATAN</p>
+          <h3>Pemberkatan Pernikahan</h3>
           <p class="d" data-k="akad.day"></p>
           <p class="t" data-k="akad.time"></p>
           <div class="card-divider"><i></i></div>
@@ -162,6 +163,36 @@
   </div>
 </section>
 
+<!-- GIFT -->
+<section id="gift" data-label="Wedding Gift" class="alt">
+  <div class="fl tl"></div><div class="fl br"></div>
+  <div class="wrap center narrow gift-wrap">
+    <p class="gift-eyebrow">A TOKEN OF LOVE</p>
+    <h2 class="title">Wedding Gift</h2>
+    <p class="gift-intro">Doa restu Anda merupakan hadiah terindah bagi kami. Namun, apabila ingin berbagi tanda kasih, Anda dapat mengirimkannya melalui pilihan berikut.</p>
+    <div class="gift-illustration" aria-hidden="true">
+      <span class="gift-ornament gift-ornament-left"></span>
+      <svg viewBox="0 0 96 76">
+        <path class="gift-envelope-back" d="M12 19h72v46H12z"/>
+        <path class="gift-envelope-flap" d="m13 20 35 28 35-28"/>
+        <path class="gift-envelope-front" d="M12 27 48 53l36-26v38H12z"/>
+        <path class="gift-envelope-line" d="m13 64 25-20m45 20L58 44"/>
+        <path class="gift-seal" d="M48 40c-5-7-13 0 0 10 13-10 5-17 0-10z"/>
+      </svg>
+      <span class="gift-ornament gift-ornament-right"></span>
+    </div>
+    <button id="giftToggle" class="gift-toggle" type="button" aria-expanded="false" aria-controls="giftDetails">
+      <span>Buka detail rekening</span><i aria-hidden="true"></i>
+    </button>
+    <div id="giftDetails" class="gift-panel" aria-hidden="true" inert>
+      <div class="gift-panel-inner">
+        <div id="giftAccounts" class="gift-accounts"></div>
+        <p id="giftStatus" class="gift-status" role="status" aria-live="polite"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- H MENGUNDANG -->
 <section id="mengundang" data-label="Mengundang" class="alt">
   <div class="fl tl"></div><div class="fl tr"></div><div class="fl bl"></div><div class="fl br"></div>
@@ -181,17 +212,17 @@
     <h2 class="names big"><span data-k="bride.short"></span><em>&amp;</em><span data-k="groom.short"></span></h2>
     <p class="date" data-k="dateShort"></p>
     <p class="closing" data-k="thanks.closing"></p>
-  </div>?">,mn bv]{}"
-</sect ion>
+  </div>
+</section>
 </main>
 <audio id="audio" loop preload="none"></audio>
 <div id="pageProgress" aria-hidden="true"></div>
 <div id="softCursor" aria-hidden="true"></div>
 <div id="petalFall" aria-hidden="true"></div>
 <div id="rsvpSuccess" aria-hidden="true"><svg viewBox="0 0 80 80"><circle cx="40" cy="40" r="34"/><path d="M24 41l11 11 22-24"/></svg><span>Konfirmasi terkirim</span></div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js"></script>
-<script src="script.js?v=20261124-2"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js"></script>
+<script defer src="script.js?v=20261124-2"></script>
 </body>
 </html>

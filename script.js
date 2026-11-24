@@ -21,12 +21,12 @@ const CONFIG = {
   },
   akad: {
     day: "Senin, 28 Desember 2026",
-    time: "10.00 – 11.00 WIB",
+    time: "11.00 WIB – sampai dengan selesai",
     place: "Sampuara kabupaten Toba",
   },
   resepsi: {
     day: "Senin, 28 Desember 2026",
-    time: "10.00 – 11.00 WIB",
+    time: "11.00 WIB – sampai dengan selesai",
     place: "Sampuara kabupaten Toba",
   },
   maps: {
@@ -38,6 +38,17 @@ const CONFIG = {
   rsvp: {
     whatsapp: "6281370914247",
     sheetsUrl: ""
+  },
+  gifts: {
+    accounts: [
+      {
+        bank: "Bank Mandiri",
+        logo: "https://www.bankmandiri.co.id/image/layout_set_logo?img_id=31567",
+        accountNumber: "1820016788580",
+        accountName: "RONALDO GULTOM",
+        transferUrl: "https://bankmandiri.co.id/en/livin"
+      }
+    ]
   },
   inviters: [
     {label: "Keluarga Mempelai Wanita", names: ["Bapak R.Silitonga", "Ibu S. Br Hasibuan"]},
@@ -182,6 +193,7 @@ const ICONS={
  acara:'<rect x="4" y="5" width="16" height="15" rx="1"/><path d="M4 10h16M9 3v4M15 3v4"/>',
  maps:'<path d="M12 21s-6-5.5-6-11a6 6 0 0 1 12 0c0 5.5-6 11-6 11z"/><circle cx="12" cy="10" r="2"/>',
  rsvp:'<circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/>',
+ gift:'<path d="M3 10h18v11H3zM2 6h20v4H2zM12 6v15M12 6H8.5a2.5 2.5 0 1 1 2.5-2.5V6zm0 0h3.5A2.5 2.5 0 1 0 13 3.5V6z"/>',
  mengundang:'<path d="M12 20s-7-4.5-7-10a4 4 0 0 1 7-2 4 4 0 0 1 7 2c0 5.5-7 10-7 10z"/>',
  thanks:'<circle cx="12" cy="12" r="1.6"/><path d="M12 10C10 6 10 4 12 3c2 1 2 3 0 7M12 14c2 4 2 6 0 7-2-1-2-3 0-7M10 12C6 10 4 10 3 12c1 2 3 2 7 0M14 12c4 2 6 2 7 0-1-2-3-2-7 0"/>'};
 const ico=k=>`<svg viewBox="0 0 24 24" aria-hidden="true">${ICONS[k]}</svg>`;
@@ -189,7 +201,8 @@ const ico=k=>`<svg viewBox="0 0 24 24" aria-hidden="true">${ICONS[k]}</svg>`;
 /* ============ INIT ============ */
 // bunga
 $$(".fl").forEach((el,i)=>el.innerHTML=CL[i%3]);
-$$(".fl-s").forEach(el=>el.innerHTML=smallCluster());
+const smallClusterMarkup=smallCluster();
+$$(".fl-s").forEach(el=>el.innerHTML=smallClusterMarkup);
 // data
 $$("[data-k]").forEach(el=>{const v=el.dataset.k.split(".").reduce((o,k)=>o&&o[k],CONFIG);if(v!=null)el.textContent=v;});
 $$("[data-photo]").forEach(el=>{
@@ -201,7 +214,7 @@ $$("[data-photo]").forEach(el=>{
       img.src=u;
       img.alt=el.dataset.photo==="bride"?CONFIG.bride.full:CONFIG.groom.full;
       img.decoding="async";
-      img.loading="eager";
+      img.loading="lazy";
       el.appendChild(img);
     }else{
       el.style.backgroundImage=`url(${u})`;el.classList.add("has");
@@ -217,6 +230,154 @@ const to=new URLSearchParams(location.search).get("to");if(to)$("#guest").textCo
 // links
 $("#maplink").href=CONFIG.maps.link;$("#mapiframe").src=CONFIG.maps.embed;
 $("#inviters").innerHTML=CONFIG.inviters.map(g=>`<small>${g.label}</small>`+g.names.map(n=>`<p>${n}</p>`).join("")).join("");
+
+const giftAccounts=$("#giftAccounts");
+const giftStatus=$("#giftStatus");
+const giftToggle=$("#giftToggle");
+const giftDetails=$("#giftDetails");
+function appendGiftText(parent,className,text){
+  const el=document.createElement("p");
+  el.className=className;
+  el.textContent=text;
+  parent.appendChild(el);
+  return el;
+}
+function makeGiftAccount(account){
+  const card=document.createElement("article");
+  card.className="gift-account";
+  const heading=document.createElement("div");
+  heading.className="gift-account-heading";
+  const bankNameValue=(account.bank||"").trim()||"Nama bank";
+  const logo=document.createElement("span");
+  logo.className="gift-bank-logo";
+  logo.setAttribute("aria-hidden","true");
+  const fallback=document.createElement("span");
+  fallback.className="gift-bank-monogram";
+  const bankWords=bankNameValue.split(/\s+/).filter(Boolean);
+  fallback.textContent=bankWords.length>1
+    ?bankWords.slice(0,2).map(word=>word[0]).join("").toUpperCase()
+    :(bankWords[0]||"B").slice(0,2).toUpperCase();
+  logo.appendChild(fallback);
+  if(account.logo){
+    const image=document.createElement("img");
+    image.src=account.logo;
+    image.alt=`Logo ${bankNameValue}`;
+    image.loading="lazy";
+    image.decoding="async";
+    image.addEventListener("error",()=>image.remove(),{once:true});
+    logo.appendChild(image);
+  }
+  heading.appendChild(logo);
+  const bankName=document.createElement("h3");
+  bankName.className="gift-bank-name";
+  bankName.textContent=bankNameValue;
+  heading.appendChild(bankName);
+  card.appendChild(heading);
+  appendGiftText(card,"gift-account-label","Nomor rekening");
+  appendGiftText(card,"gift-account-number",account.accountNumber||"Nomor rekening belum tersedia");
+  appendGiftText(card,"gift-account-owner",account.accountName?`a.n. ${account.accountName}`:"Nama pemilik rekening belum tersedia");
+
+  const actions=document.createElement("div");
+  actions.className="gift-account-actions";
+  const copyButton=document.createElement("button");
+  copyButton.type="button";
+  copyButton.className="gift-action gift-copy";
+  copyButton.textContent="Salin Nomor Rekening";
+  copyButton.disabled=!account.accountNumber;
+  copyButton.addEventListener("click",()=>copyGiftAccount(account.accountNumber));
+  actions.appendChild(copyButton);
+
+  let transferUrl="";
+  if(account.transferUrl){
+    try{
+      const parsedUrl=new URL(account.transferUrl);
+      if(parsedUrl.protocol==="https:")transferUrl=parsedUrl.href;
+    }catch(error){
+      transferUrl="";
+    }
+  }
+  if(transferUrl){
+    const sendLink=document.createElement("a");
+    sendLink.className="gift-action gift-send";
+    sendLink.href=transferUrl;
+    sendLink.target="_blank";
+    sendLink.rel="noopener noreferrer";
+    sendLink.textContent="Kirim Hadiah";
+    actions.appendChild(sendLink);
+  }else{
+    const sendButton=document.createElement("button");
+    sendButton.type="button";
+    sendButton.className="gift-action gift-send";
+    sendButton.textContent="Kirim Hadiah";
+    sendButton.disabled=true;
+    sendButton.title="Tautan resmi transfer belum tersedia";
+    actions.appendChild(sendButton);
+    appendGiftText(actions,"gift-transfer-hint","Tautan resmi transfer belum tersedia.");
+  }
+  card.appendChild(actions);
+  return card;
+}
+function copyGiftAccount(accountNumber){
+  const fallbackCopy=()=>{
+    const field=document.createElement("textarea");
+    field.value=accountNumber;
+    field.setAttribute("readonly","");
+    field.style.position="fixed";
+    field.style.opacity="0";
+    document.body.appendChild(field);
+    field.select();
+    let copied=false;
+    try{copied=document.execCommand("copy");}
+    catch(error){copied=false;}
+    field.remove();
+    return copied;
+  };
+  if(navigator.clipboard&&window.isSecureContext){
+    navigator.clipboard.writeText(accountNumber).then(()=>{
+      giftStatus.textContent="Nomor rekening berhasil disalin.";
+    },()=>{
+      giftStatus.textContent=fallbackCopy()
+        ?"Nomor rekening berhasil disalin."
+        :"Nomor rekening tidak dapat disalin. Silakan salin secara manual.";
+    });
+  }else{
+    giftStatus.textContent=fallbackCopy()
+      ?"Nomor rekening berhasil disalin."
+      :"Nomor rekening tidak dapat disalin. Silakan salin secara manual.";
+  }
+}
+if(giftAccounts){
+  const accounts=Array.isArray(CONFIG.gifts.accounts)?CONFIG.gifts.accounts:[];
+  if(accounts.length){
+    accounts.forEach(account=>giftAccounts.appendChild(makeGiftAccount(account)));
+  }else{
+    const emptyCard=document.createElement("article");
+    emptyCard.className="gift-account gift-empty";
+    const heading=document.createElement("h3");
+    heading.className="gift-bank-name";
+    heading.textContent="Informasi rekening";
+    emptyCard.appendChild(heading);
+    appendGiftText(emptyCard,"gift-empty-copy","Detail rekening akan ditampilkan di sini.");
+    const sendButton=document.createElement("button");
+    sendButton.type="button";
+    sendButton.className="gift-action gift-send";
+    sendButton.textContent="Kirim Hadiah";
+    sendButton.disabled=true;
+    sendButton.title="Tautan resmi transfer belum tersedia";
+    emptyCard.appendChild(sendButton);
+    appendGiftText(emptyCard,"gift-transfer-hint","Tautan resmi transfer belum tersedia.");
+    giftAccounts.appendChild(emptyCard);
+  }
+}
+giftToggle.addEventListener("click",()=>{
+  const isOpen=giftToggle.getAttribute("aria-expanded")==="true";
+  giftToggle.setAttribute("aria-expanded",String(!isOpen));
+  giftToggle.querySelector("span").textContent=isOpen?"Buka detail rekening":"Tutup detail rekening";
+  giftDetails.classList.toggle("is-open",!isOpen);
+  giftDetails.setAttribute("aria-hidden",String(isOpen));
+  giftDetails.inert=isOpen;
+  $("#gift .gift-illustration").classList.toggle("is-open",!isOpen);
+});
 // nav
 const secs=$$("main section");
 $("#nav").innerHTML=secs.map(s=>`<a href="#${s.id}" aria-label="${s.dataset.label}" title="${s.dataset.label}" data-id="${s.id}">${ico(s.id)}<span>${s.dataset.label}</span></a>`).join("");
@@ -242,12 +403,11 @@ function updateNextButton(active){
 // Kalender Desember 2026
 const calendarGrid=$("#calendarGrid");
 if(calendarGrid){
-  for(let offset=0;offset<1;offset++){
-    calendarGrid.insertAdjacentHTML("beforeend",'<span class="calendar-day empty"></span>');
-  }
+  const days=['<span class="calendar-day empty"></span>'];
   for(let day=1;day<=31;day++){
-    calendarGrid.insertAdjacentHTML("beforeend",`<span class="calendar-day${day===28?' selected':''}">${day}</span>`);
+    days.push(`<span class="calendar-day${day===28?' selected':''}">${day}</span>`);
   }
+  calendarGrid.insertAdjacentHTML("beforeend",days.join(""));
 }
 
 const saveDate=$("#saveDate");
@@ -264,16 +424,31 @@ if(saveDate&&calendarMenu){
 const calendarEvent={
   title:`Pernikahan ${CONFIG.bride.short} & ${CONFIG.groom.short}`,
   location:CONFIG.akad.place,
-  start:"20261228T100000",
-  end:"20261228T110000",
-  isoStart:"2026-12-28T10:00:00+07:00",
-  isoEnd:"2026-12-28T11:00:00+07:00",
-  details:"Akad Nikah dan Resepsi - Pernikahan Angel & Ronaldo"
+  start:"20261228",
+  end:"20261229",
+  isoStart:"2026-12-28",
+  isoEnd:"2026-12-29",
+  details:"Pemberkatan Pernikahan dan Resepsi - Pernikahan Angel & Ronaldo"
 };
 
 function downloadICS(){
   const now=new Date().toISOString().replace(/[-:]/g,"").replace(/\.\d{3}Z$/,"Z");
-  const ics=["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Wedding Invitation//EN","CALSCALE:GREGORIAN","BEGIN:VTIMEZONE","TZID:Asia/Jakarta","BEGIN:STANDARD","TZOFFSETFROM:+0700","TZOFFSETTO:+0700","DTSTART:19700101T000000","TZNAME:WIB","END:STANDARD","END:VTIMEZONE","BEGIN:VEVENT",`UID:${now}-wedding@example.com`,`DTSTAMP:${now}`,"DTSTART;TZID=Asia/Jakarta:20261228T100000","DTEND;TZID=Asia/Jakarta:20261228T110000",`SUMMARY:${calendarEvent.title}`,`LOCATION:${calendarEvent.location}`,`DESCRIPTION:${calendarEvent.details}`,"END:VEVENT","END:VCALENDAR"].join("\r\n");
+  const ics=[
+    "BEGIN:VCALENDAR",
+    "VERSION:2.0",
+    "PRODID:-//Wedding Invitation//EN",
+    "CALSCALE:GREGORIAN",
+    "BEGIN:VEVENT",
+    `UID:${now}-wedding@example.com`,
+    `DTSTAMP:${now}`,
+    `DTSTART;VALUE=DATE:${calendarEvent.start}`,
+    `DTEND;VALUE=DATE:${calendarEvent.end}`,
+    `SUMMARY:${calendarEvent.title}`,
+    `LOCATION:${calendarEvent.location}`,
+    `DESCRIPTION:${calendarEvent.details}`,
+    "END:VEVENT",
+    "END:VCALENDAR"
+  ].join("\r\n");
   const blob=new Blob([ics],{type:"text/calendar;charset=utf-8"});
   const url=URL.createObjectURL(blob);
   const link=document.createElement("a");link.href=url;link.download="pernikahan-angel-ronaldo.ics";document.body.appendChild(link);link.click();link.remove();URL.revokeObjectURL(url);
@@ -287,7 +462,7 @@ if(calendarMenu){
       window.open(url,"_blank","noopener");
     }else if(type==="apple")downloadICS();
     else if(type==="outlook"){
-      const url=`https://outlook.live.com/calendar/0/deeplink/compose?subject=${encodeURIComponent(calendarEvent.title)}&startdt=${encodeURIComponent(calendarEvent.isoStart)}&enddt=${encodeURIComponent(calendarEvent.isoEnd)}&body=${encodeURIComponent(calendarEvent.details)}&location=${encodeURIComponent(calendarEvent.location)}`;
+      const url=`https://outlook.live.com/calendar/0/deeplink/compose?subject=${encodeURIComponent(calendarEvent.title)}&startdt=${encodeURIComponent(calendarEvent.isoStart)}&enddt=${encodeURIComponent(calendarEvent.isoEnd)}&allday=true&body=${encodeURIComponent(calendarEvent.details)}&location=${encodeURIComponent(calendarEvent.location)}`;
       window.open(url,"_blank","noopener");
     }
     calendarMenu.classList.remove("open");saveDate.setAttribute("aria-expanded","false");
